@@ -12,18 +12,39 @@ let idCount = links.length
 const resolvers = {
   Query: {
     info: () => 'Test',
-    feed: () => links
+    feed: () => links,
+    link: (parent, {id}) => {
+      const link = links.find(link => link.id === id);
+      return link;
+    } 
   },
   Mutation: {
-    post: (parent, args) => {
+    post: (parent, {description, url}) => {
       const link = {
         id: `link-${idCount++}`,
-        description: args.description,
-        url: args.url
+        url: url,
+        description: description
       };
       links.push(link);
       return link
+    },
+    updateLink: (parent, {id, url, description}) => {
+      const newLink = {
+        id: id,
+        description: description,
+        url: url
+      };
+      const linkIndex = links.findIndex(link => link.id === id);
+      links[linkIndex] = newLink;
+      return newLink;
+    },
+    deleteLink: (parent, {id}) => {
+      const linkIndex = links.findIndex(link => link.id === id);
+      const link = links[linkIndex];
+      links.splice(linkIndex,1);
+      return link;
     }
+
   },
   Link: {
     id: (parent) => parent.id,
