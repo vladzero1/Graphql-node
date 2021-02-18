@@ -26,7 +26,7 @@ const resolvers = {
         description: description
       };
       links.push(link);
-      return link
+      return link;
     },
     updateLink: (parent, {id, url, description}) => {
       const newLink = {

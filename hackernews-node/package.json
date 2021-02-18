@@ -10,7 +10,11 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@prisma/client": "^2.17.0",
     "apollo-server": "^2.19.2",
     "nodemon": "^2.0.7"
+  },
+  "devDependencies": {
+    "prisma": "^2.17.0"
   }
 }
